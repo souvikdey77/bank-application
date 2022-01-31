@@ -20,7 +20,8 @@ import javax.validation.Valid;
  * @Souvik Dey
  */
 @RestController
-@RequestMapping("/api/v1/account")
+@RequestMapping("/api/v1")
+@CrossOrigin(origins = "*", allowedHeaders = "*")
 public class AccountController {
 
     @Autowired
@@ -37,6 +38,20 @@ public class AccountController {
     public ResponseEntity<Account> create(@RequestBody @Valid Account account) throws Exception {
         Account newAccount =  accountService.create(account);
         return ResponseEntity.ok(newAccount);
+    }
+
+    /**
+     * Method of transferring the amount
+     *
+     * @param userName
+     * @return account
+     * @throws Exception
+     */
+    @CrossOrigin(origins = "*")
+    @GetMapping(value = "/fetchAccountNumber/{username}",  produces = MediaType.APPLICATION_JSON_VALUE)
+    public ResponseEntity<String> fetchAccount(@PathVariable("username") String userName) throws Exception {
+        String accountNumber =  accountService.fetchAccountNumber(userName);
+        return ResponseEntity.ok(accountNumber);
     }
 
     /**

@@ -11,4 +11,5 @@ public interface AccountService {
     TransactionDetail transferMoney(TransferBalanceTO transferBalanceTO);
     TransactionDetail depositMoney(DepositBalanceTO depositBalanceTO);
     AccountStatement getStatement(String accountNumber);
+    String fetchAccountNumber(String userName);
 }

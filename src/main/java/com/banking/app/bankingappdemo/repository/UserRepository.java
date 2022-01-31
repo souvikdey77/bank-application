@@ -1,5 +1,6 @@
 package com.banking.app.bankingappdemo.repository;
 
+import com.banking.app.bankingappdemo.model.Account;
 import com.banking.app.bankingappdemo.model.UserDao;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.stereotype.Repository;

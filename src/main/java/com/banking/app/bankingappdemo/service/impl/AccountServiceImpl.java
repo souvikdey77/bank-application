@@ -2,11 +2,13 @@ package com.banking.app.bankingappdemo.service.impl;
 
 import com.banking.app.bankingappdemo.model.Account;
 import com.banking.app.bankingappdemo.model.TransactionDetail;
+import com.banking.app.bankingappdemo.model.UserDao;
 import com.banking.app.bankingappdemo.pojo.AccountStatement;
 import com.banking.app.bankingappdemo.pojo.DepositBalanceTO;
 import com.banking.app.bankingappdemo.pojo.TransferBalanceTO;
 import com.banking.app.bankingappdemo.repository.AccountRepository;
 import com.banking.app.bankingappdemo.repository.TransactionRepository;
+import com.banking.app.bankingappdemo.repository.UserRepository;
 import com.banking.app.bankingappdemo.service.AccountService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -28,6 +30,9 @@ public class AccountServiceImpl implements AccountService {
 
     @Autowired
     private TransactionRepository transactionRepository;
+
+    @Autowired
+    private UserRepository userRepository;
 
     @Override
     public Account create(Account account) {
@@ -105,5 +110,11 @@ public class AccountServiceImpl implements AccountService {
         accountStatement.setCurrentBalance(account.getTotalBalance());
         accountStatement.setTransactionHistory(transactionDetails);
         return accountStatement;
+    }
+
+    @Override
+    public String fetchAccountNumber(String userName) {
+        UserDao user = userRepository.findByUserName(userName);
+        return user.getAccountNumber();
     }
 }
